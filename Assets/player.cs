@@ -8,6 +8,8 @@ public class player : MonoBehaviour
     public float speed;
     public float lookspeed;
 
+    public Camera camera;
+
    
  
     // Start is called before the first frame update
@@ -19,10 +21,22 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
-    
-        //move right
-        if (Input.GetKey(KeyCode.D))
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                Debug.Log("slected");
+                hit.transform.tag = "Selected";
+                // the object identified by hit.transform was clicked
+                // do whatever you want
+            }
+
+        }
+            //move right
+            if (Input.GetKey(KeyCode.D))
         {
             transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
         }
