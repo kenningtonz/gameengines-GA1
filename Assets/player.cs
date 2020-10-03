@@ -28,13 +28,25 @@ public class player : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                Debug.Log("slected");
-                hit.transform.tag = "Selected";
-                // the object identified by hit.transform was clicked
-                // do whatever you want
+                if (hit.transform.tag == "UnSelected")
+               {
+                    hit.transform.tag = "Selected";
+                    Debug.Log("slected");
+
+                }
+                else if (hit.transform.tag == "Selected")
+                {
+                    hit.transform.tag = "UnSelected";
+                    Debug.Log("unslected");
+                }
+               
+               
             }
 
         }
+        /////////
+        //movement
+
             //move right
             if (Input.GetKey(KeyCode.D))
         {
@@ -66,6 +78,9 @@ public class player : MonoBehaviour
             transform.Translate(new Vector3(0, -speed * Time.deltaTime, 0));
         }
 
+        /////////////
+        //Looking
+
         //look left
         if (Input.GetKey(KeyCode.Q))
         {
@@ -77,6 +92,19 @@ public class player : MonoBehaviour
         {
             transform.Rotate(new Vector3(0, lookspeed * Time.deltaTime, 0));
         }
+
+        //look up
+        if (Input.GetKey(KeyCode.R))
+        {
+            transform.Rotate(new Vector3(-lookspeed * Time.deltaTime, 0, 0));
+        }
+
+        //look down
+        if (Input.GetKey(KeyCode.F))
+        {
+            transform.Rotate(new Vector3(lookspeed * Time.deltaTime, 0, 0));
+        }
+
 
 
     }

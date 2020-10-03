@@ -6,7 +6,7 @@ public class ObjectController : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    GameObject gameObject;
+  //  GameObject gameObject;
     public float speed = 10.0f;
 
     void Start()
@@ -17,7 +17,14 @@ public class ObjectController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if (gameObject.tag == "Selected")
+        if (Input.GetKey(KeyCode.K))
+        {
+            Debug.Log("kinimatic");
+            this.transform.GetComponent<Rigidbody>().isKinematic = !this.transform.GetComponent<Rigidbody>().isKinematic;
+        }
+
+
+        if (this.tag == "Selected")
         {
             //move right
             if (Input.GetKey(KeyCode.RightArrow))
