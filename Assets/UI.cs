@@ -33,6 +33,24 @@ public class UI : MonoBehaviour
         Debug.Log("grass");
     }
 
+    public void spawnSqurePole()
+    {
+        Instantiate(myObjects[3], new Vector3(0, 0, 0), Quaternion.identity);
+        
+    }
+
+    public void spawnSpike()
+    {
+        Instantiate(myObjects[4], new Vector3(0, 0, 0), Quaternion.identity);
+        
+    }
+
+    public void spawnPipe()
+    {
+        Instantiate(myObjects[5], new Vector3(0, 0, 0), Quaternion.identity);
+        
+    }
+
     // Update is called once per frame
     void Update()
     {
