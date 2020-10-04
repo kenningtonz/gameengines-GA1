@@ -5251,8 +5251,9 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Movement = W/A/S/D       Look Up/Down - R/F    Look Left/Right Q/E       
-    \nClick to select and unselect object       K to unselect all\nArrows to move
-    object    Rotate Object C/V/B/N       L to reset selected rotation."
+    \nClick to select and unselect object       K to unselect all        Backspace
+    to delete  \nArrows to move object    Rotate Object C/V/B/N       L to reset
+    selected rotation. "
 --- !u!222 &287157451
 CanvasRenderer:
   m_ObjectHideFlags: 0

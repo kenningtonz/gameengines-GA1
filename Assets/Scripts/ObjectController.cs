@@ -10,11 +10,10 @@ public class ObjectController : MonoBehaviour
 
     //  GameObject gameObject;
     public float speed = 10.0f;
-    private Quaternion resetrotate;
+
     void Start()
     {
-
-         resetrotate = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z);
+     
      }
 
     // Update is called once per frame
@@ -37,8 +36,8 @@ public class ObjectController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.K))
         {
-            Debug.Log("unselect");
-            this.transform.tag = "Unslected";
+           // Debug.Log("unselect");
+            this.transform.tag = "UnSelected";
             this.GetComponent<ParticleSystem>().Stop();
         }
 
@@ -48,13 +47,13 @@ public class ObjectController : MonoBehaviour
          
             if (Input.GetKey(KeyCode.Backspace))
             {
-                Debug.Log("delete");
+              //  Debug.Log("delete");
                 Destroy(this.gameObject);
             }
             if (Input.GetKey(KeyCode.L))
             {
-                Debug.Log("reset");
-                this.transform.rotation = resetrotate;
+              //  Debug.Log("reset");
+                this.transform.rotation = Quaternion.Euler(0,0,0);
             }
 
 

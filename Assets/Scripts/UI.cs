@@ -19,7 +19,7 @@ public class UI : MonoBehaviour
     public void isGravity()
     {
      gravity = !gravity;
-        Debug.Log("gravity toggled"); 
+       // Debug.Log("gravity toggled"); 
     }
 
 
@@ -27,19 +27,19 @@ public class UI : MonoBehaviour
     public void spawnGrass()
         {
         Instantiate(myObjects[0], new Vector3 (0,0,0), Quaternion.identity);
-        Debug.Log("grass");
+        //Debug.Log("grass");
         }
 
     public void spawnTreeSpruce()
     {
         Instantiate(myObjects[1], new Vector3(0, 0, 0), Quaternion.identity);
-        Debug.Log("grass");
+    //    Debug.Log("grass");
     }
 
     public void spawnTreeOak()
     {
         Instantiate(myObjects[2], new Vector3(0, 0, 0), Quaternion.identity);
-        Debug.Log("grass");
+      //  Debug.Log("grass");
     }
 
     public void spawnSqurePole()
