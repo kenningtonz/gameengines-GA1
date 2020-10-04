@@ -8,7 +8,7 @@ public class player : MonoBehaviour
     public float speed;
     public float lookspeed;
 
-    public Camera camera;
+    public Camera maincamera;
 
    
  
@@ -24,7 +24,7 @@ public class player : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = maincamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
