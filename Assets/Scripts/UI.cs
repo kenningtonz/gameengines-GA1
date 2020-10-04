@@ -11,6 +11,7 @@ public class UI : MonoBehaviour
   // public GameObject camera; // gonna make the object spawn in front of the camera
     public bool gravity;
 
+
     private void Start()
     {
         
@@ -18,8 +19,9 @@ public class UI : MonoBehaviour
     public void isGravity()
     {
      gravity = !gravity;
-        Debug.Log("gravity toggled");
+        Debug.Log("gravity toggled"); 
     }
+
 
 
     public void spawnGrass()
@@ -30,13 +32,13 @@ public class UI : MonoBehaviour
 
     public void spawnTreeSpruce()
     {
-        Instantiate(myObjects[1], new Vector3(0, 0, 0), Quaternion.Euler(-90, 0, 0));
+        Instantiate(myObjects[1], new Vector3(0, 0, 0), Quaternion.identity);
         Debug.Log("grass");
     }
 
     public void spawnTreeOak()
     {
-        Instantiate(myObjects[2], new Vector3(0, 0, 0), Quaternion.Euler(-90, 0, 0));
+        Instantiate(myObjects[2], new Vector3(0, 0, 0), Quaternion.identity);
         Debug.Log("grass");
     }
 

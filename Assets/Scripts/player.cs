@@ -9,9 +9,9 @@ public class player : MonoBehaviour
     public float lookspeed;
 
     public Camera maincamera;
-
    
- 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,29 +21,29 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = maincamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+       
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray ray = maincamera.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.transform.tag == "UnSelected")
-               {
-                    hit.transform.tag = "Selected";
-                    Debug.Log("slected");
 
+                if (hit.transform.tag == "UnSelected")
+                {
+                    hit.transform.tag = "Selected";
+                    hit.transform.GetComponent<ParticleSystem>().Play();
                 }
                 else if (hit.transform.tag == "Selected")
                 {
                     hit.transform.tag = "UnSelected";
-                    Debug.Log("unslected");
+                    hit.transform.GetComponent<ParticleSystem>().Stop();
                 }
-               
-               
+            }
             }
 
-        }
+     
+
         /////////
         //movement
 
