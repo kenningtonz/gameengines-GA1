@@ -5,113 +5,154 @@ using UnityEngine.UI;
 
 public class ObjectController : MonoBehaviour
 {
+    private Command move, resetrotate, delete, unselect, rotate, gravity;
+    public GameObject gameManager;
+   // public Button 
 
-    public GameObject gameObjectcontroller;
-
-    //  GameObject gameObject;
     public float speed = 10.0f;
 
     void Start()
     {
-     
-     }
+
+        resetrotate = gameObject.AddComponent<ResetRotation>();
+        move = gameObject.AddComponent<MoveObject>();
+        delete = gameObject.AddComponent<DeleteObject>();
+        unselect = gameObject.AddComponent<UnselectAll>();
+        rotate = gameObject.AddComponent<RotateObject>();
+        gravity = gameObject.AddComponent<ToggleGravity>();
+    }
 
     // Update is called once per frame
     void Update()
     {
 
+        //if (gameManager.GetComponent<spawnButton>().gravity == true)
+        //{
+        //    Debug.Log("gravitytreu");
+        //    gravity.Execute();
 
+        //}
+        //if (gameManager.GetComponent<spawnButton>().gravity == false)
+        //{
+        //    Debug.Log("gravityfalse");
+        //    gravity.Execute();
 
-        if (gameObjectcontroller.GetComponent<UI>().gravity == true)
-        {
-            // Debug.Log("gravitytreu");
-            this.transform.GetComponent<Rigidbody>().isKinematic = true;
-        }
-        if (gameObjectcontroller.GetComponent<UI>().gravity == false)
-        {
-            //Debug.Log("gravityfalse");
-            this.transform.GetComponent<Rigidbody>().isKinematic = false;
-
-        }
+        //}
 
         if (Input.GetKey(KeyCode.K))
         {
-           // Debug.Log("unselect");
-            this.transform.tag = "UnSelected";
-            this.GetComponent<ParticleSystem>().Stop();
+            // Debug.Log("unselect");
+            unselect.Execute();
+            CommandManager.Instance().addcommand(unselect);
         }
 
         if (this.tag == "Selected")
         {
-
-         
-            if (Input.GetKey(KeyCode.Backspace))
+            if (Input.GetKeyDown(KeyCode.Backspace))
             {
-              //  Debug.Log("delete");
-                Destroy(this.gameObject);
+                delete.Execute();
+                CommandManager.Instance().addcommand(delete);
             }
-            if (Input.GetKey(KeyCode.L))
+
+            if (Input.GetKeyDown(KeyCode.L))
             {
-              //  Debug.Log("reset");
-                this.transform.rotation = Quaternion.Euler(0,0,0);
+                resetrotate.Execute();
+                CommandManager.Instance().addcommand(resetrotate);
             }
 
 
             //move right
-            if (Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+                // Command move = new MoveObject(gameObject, new Vector3(speed * Time.deltaTime, 0, 0));
+                move.GetComponent<MoveObject>().m_direction = new Vector3(1, 0, 0);
+                move.Execute();
+                CommandManager.Instance().addcommand(move);
+
             }
+
+
             //move left
-            if (Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
+                //  Command move = new MoveObject(gameObject, new Vector3(-speed * Time.deltaTime, 0, 0));
+                move.GetComponent<MoveObject>().m_direction = new Vector3(-1, 0, 0);
+              move.Execute();
+                CommandManager.Instance().addcommand(move);
+
             }
             //move backwards
-            if (Input.GetKey(KeyCode.DownArrow))
+            if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                transform.Translate(new Vector3(0, 0, -speed * Time.deltaTime));
+                //  Command move = new MoveObject(gameObject, new Vector3(0, 0, -speed * Time.deltaTime));
+                move.GetComponent<MoveObject>().m_direction = new Vector3(0, 0, -1);
+              move.Execute();
+                CommandManager.Instance().addcommand(move);
+
             }
             //move forwards
-            if (Input.GetKey(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
+                // Command move = new MoveObject(gameObject, new Vector3(0, 0, speed * Time.deltaTime));
+                move.GetComponent<MoveObject>().m_direction = new Vector3(0, 0, 1);
+              move.Execute();
+                CommandManager.Instance().addcommand(move);
+
             }
 
             //move up
-            if (Input.GetKey(KeyCode.PageUp))
+            if (Input.GetKeyDown(KeyCode.PageUp))
             {
-                transform.Translate(new Vector3(0, speed * Time.deltaTime,0 ));
+                //Command move = new MoveObject(gameObject, new Vector3(0, speed * Time.deltaTime, 0));
+                move.GetComponent<MoveObject>().m_direction = new Vector3(0, 1, 0);
+              move.Execute();
+                CommandManager.Instance().addcommand(move);
+
             }
             //move down
-            if (Input.GetKey(KeyCode.PageDown))
+            if (Input.GetKeyDown(KeyCode.PageDown))
             {
-                transform.Translate(new Vector3(0, -speed * Time.deltaTime,0));
+                // Command move = new MoveObject();
+                move.GetComponent<MoveObject>().m_direction = new Vector3(0, -1, 0);
+              move.Execute();
+                CommandManager.Instance().addcommand(move);
             }
 
             ////rotate
             //rotate left
-            if (Input.GetKey(KeyCode.C))
+            if (Input.GetKeyDown(KeyCode.C))
             {
-                transform.Rotate(new Vector3(0, -speed * Time.deltaTime, 0));
+                rotate.GetComponent<RotateObject>().m_direction = new Vector3(0, -45, 0);
+                rotate.Execute();
+                CommandManager.Instance().addcommand(rotate);
+
             }
 
             //rotate right
-            if (Input.GetKey(KeyCode.V))
+            if (Input.GetKeyDown(KeyCode.V))
             {
-                transform.Rotate(new Vector3(0, speed * Time.deltaTime, 0));
+                rotate.GetComponent<RotateObject>().m_direction = new Vector3(0, 45, 0);
+                rotate.Execute();
+                CommandManager.Instance().addcommand(rotate);
+            
             }
 
             //rotate up
-            if (Input.GetKey(KeyCode.B))
+            if (Input.GetKeyDown(KeyCode.B))
             {
-                transform.Rotate(new Vector3(-speed * Time.deltaTime, 0, 0));
+                rotate.GetComponent<RotateObject>().m_direction = new Vector3(-45, 0, 0);
+                rotate.Execute();
+                CommandManager.Instance().addcommand(rotate);
+              
             }
 
             //rotate down
-            if (Input.GetKey(KeyCode.N))
+            if (Input.GetKeyDown(KeyCode.N))
             {
-                transform.Rotate(new Vector3(speed * Time.deltaTime, 0, 0));
+                rotate.GetComponent<RotateObject>().m_direction = new Vector3(45, 0, 0);
+                rotate.Execute();
+                CommandManager.Instance().addcommand(rotate);
+            
             }
         }
 

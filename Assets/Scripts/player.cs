@@ -7,15 +7,18 @@ public class player : MonoBehaviour
 
     public float speed;
     public float lookspeed;
-
     public Camera maincamera;
+    private Command select;
+    private CommandManager commandManager;
    
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        commandManager = CommandManager.Instance();
+
+
     }
 
     // Update is called once per frame
@@ -26,29 +29,35 @@ public class player : MonoBehaviour
             {
                 Ray ray = maincamera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-
-                if (hit.transform.tag == "UnSelected")
-                {
-                    hit.transform.tag = "Selected";
-                    hit.transform.GetComponent<ParticleSystem>().Play();
-                }
-                else if (hit.transform.tag == "Selected")
-                {
-                    hit.transform.tag = "UnSelected";
-                    hit.transform.GetComponent<ParticleSystem>().Stop();
-                }
-            }
+                if (Physics.Raycast(ray, out hit))
+                 {
+                          if (hit.transform.tag == "UnSelected" || hit.transform.tag == "Selected")
+                         {
+                                //select command
+                             select = hit.collider.gameObject.AddComponent<Selecting>();
+                             select.Execute();
+                             commandManager.addcommand(select);
+                         }
+                    }
             }
 
      
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+          
+            commandManager.undocommand();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+       
+            commandManager.redocommand();
+        }
 
         /////////
         //movement
 
-            //move right
-            if (Input.GetKey(KeyCode.D))
+        //move right
+        if (Input.GetKey(KeyCode.D))
         {
             transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
         }

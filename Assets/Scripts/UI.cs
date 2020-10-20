@@ -16,11 +16,6 @@ public class UI : MonoBehaviour
     {
         
     }
-    public void isGravity()
-    {
-     gravity = !gravity;
-       // Debug.Log("gravity toggled"); 
-    }
 
 
 
