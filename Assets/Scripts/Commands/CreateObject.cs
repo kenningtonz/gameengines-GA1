@@ -4,27 +4,36 @@ using UnityEngine;
 
 public class CreateObject : Command
 {
-    //private GameObject m_Object;
-    //private Vector3 m_position;
-    //private Quaternion m_rotation;
+    private GameObject m_Object;
+    private Vector3 m_position;
 
-    //public CreateObject(GameObject Object, Vector3 position, Quaternion rotation)
-    //{
-    //    m_Object = Object;
-    //    m_position = position;
-    //    m_rotation = rotation;
-    //}
-
-    public override void Execute()
+    public CreateObject(GameObject Object, Vector3 Position)
     {
-        Debug.Log("created");
-        Instantiate(this);
+        m_Object = Object;
+            m_position = Position;
+   
+    }
+
+    public  void Execute()
+    {
+        if (m_Object.activeSelf == false)
+        {
+
+            m_Object.SetActive(true);
+        }
+        else
+        {
+          //  Debug.Log("created");
+          m_Object =   MonoBehaviour.Instantiate(m_Object, m_position, Quaternion.Euler(0,0,0));
+        }
     }
 
 
-    public override void Undo()
+    public void Undo()
     {
-        Destroy(this);
+        m_Object.SetActive(false);
+
+
     }
 
 

@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class ResetRotation : Command
 {
+    private GameObject m_Object;
   private Quaternion oldrotation;
 
-
-    public override void Execute()
+    public ResetRotation(GameObject Object)
     {
-        oldrotation = this.transform.rotation;
-        this.transform.rotation = new Quaternion(0, 0, 0, 0);
+        m_Object = Object;
+        oldrotation = m_Object.transform.rotation;
     }
 
-    public override void Undo()
+    public  void Execute()
     {
-        this.transform.rotation = oldrotation;
+
+        m_Object.transform.rotation = new Quaternion(0, 0, 0, 0);
+    }
+
+    public  void Undo()
+    {
+        m_Object.transform.rotation = oldrotation;
     }
 
 

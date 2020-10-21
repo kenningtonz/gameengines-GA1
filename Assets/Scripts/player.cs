@@ -17,9 +17,9 @@ public class player : MonoBehaviour
     void Start()
     {
         commandManager = CommandManager.Instance();
-
-
     }
+
+
 
     // Update is called once per frame
     void Update()
@@ -33,8 +33,9 @@ public class player : MonoBehaviour
                  {
                           if (hit.transform.tag == "UnSelected" || hit.transform.tag == "Selected")
                          {
-                                //select command
-                             select = hit.collider.gameObject.AddComponent<Selecting>();
+                    //select command
+                    select = new Selecting(hit.collider.gameObject);
+                             //select = hit.collider.gameObject.AddComponent<Selecting>();
                              select.Execute();
                              commandManager.addcommand(select);
                          }
@@ -42,16 +43,6 @@ public class player : MonoBehaviour
             }
 
      
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-          
-            commandManager.undocommand();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-       
-            commandManager.redocommand();
-        }
 
         /////////
         //movement

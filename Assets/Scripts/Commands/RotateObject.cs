@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class RotateObject : Command
 {
+    private GameObject m_Object;
+    private Vector3 m_direction;
 
-    public Vector3 m_direction;
 
-    public override void Execute()
+    public RotateObject(GameObject Object, Vector3 Direction)
     {
-        this.transform.rotation = Quaternion.Euler(m_direction);
+        m_Object = Object;
+        m_direction = Direction;
     }
 
-    public override void Undo()
+    public  void Execute()
     {
-       this.transform.rotation = Quaternion.Euler(-m_direction);
+        m_Object.transform.rotation = Quaternion.Euler(m_direction);
+    }
+
+    public  void Undo()
+    {
+        m_Object.transform.rotation = Quaternion.Euler(-m_direction);
     }
 
 

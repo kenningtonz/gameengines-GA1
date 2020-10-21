@@ -4,34 +4,38 @@ using UnityEngine;
 
 public class Selecting : Command
 {
+    private GameObject m_Object;
+    public Selecting(GameObject Object)
+    {
+        m_Object = Object;
+    }
 
-
-    public override void Execute()
+    public  void Execute()
     {
         //select objects
-        if (this.transform.CompareTag("UnSelected"))
+        if (m_Object.transform.CompareTag("UnSelected"))
         {
-            this.transform.tag = "Selected";
-            this.transform.GetComponent<ParticleSystem>().Play();
+            m_Object.transform.tag = "Selected";
+            m_Object.transform.GetComponent<ParticleSystem>().Play();
         }
-        else if (this.transform.CompareTag("Selected"))
+        else if (m_Object.transform.CompareTag("Selected"))
         {
-            this.transform.tag = "UnSelected";
-            this.transform.GetComponent<ParticleSystem>().Stop();
+            m_Object.transform.tag = "UnSelected";
+            m_Object.transform.GetComponent<ParticleSystem>().Stop();
         }
     }
 
-    public override void Undo()
+    public  void Undo()
     {
-        if (this.transform.CompareTag("UnSelected"))
+        if (m_Object.transform.CompareTag("UnSelected"))
         {
-            this.transform.tag = "Selected";
-            this.transform.GetComponent<ParticleSystem>().Play();
+            m_Object.transform.tag = "Selected";
+            m_Object.transform.GetComponent<ParticleSystem>().Play();
         }
-        else if (this.transform.CompareTag("Selected"))
+        else if (m_Object.transform.CompareTag("Selected"))
         {
-            this.transform.tag = "UnSelected";
-            this.transform.GetComponent<ParticleSystem>().Stop();
+            m_Object.transform.tag = "UnSelected";
+            m_Object.transform.GetComponent<ParticleSystem>().Stop();
         }
     }
 }

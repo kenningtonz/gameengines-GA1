@@ -5,29 +5,24 @@ using UnityEngine.UI;
 
 public class spawnButton : MonoBehaviour
 {
-   // public ObjectType objectspawntype;
-    // Start is called before the first frame update
-    public bool gravity;
+  
   
     public void spawnbuttonnn(int value)
     {
-        Debug.Log("buttonspawn");
+    
+         ObjectFactory.Instance().createobject((ObjectType)value);
 
-            ObjectFactory.Instance().createobject((ObjectType)value);
-      
     }
 
-
-
-    public void isGravity()
+    public void undofunction()
     {
-        gravity = !gravity;
-        // Debug.Log("gravity toggled"); 
+       CommandManager.Instance().undocommand();
+
+    }
+    public void redofunction()
+    {
+        CommandManager.Instance().redocommand();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

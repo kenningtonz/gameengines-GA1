@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class ToggleGravity : Command
 {
-    public override void Execute()
+    private GameObject m_Object;
+
+    public ToggleGravity(GameObject Object)
     {
-        this.transform.GetComponent<Rigidbody>().isKinematic = !this.transform.GetComponent<Rigidbody>().isKinematic;
+        m_Object = Object;
     }
 
-    public override void Undo()
+
+    public  void Execute()
     {
-        this.transform.GetComponent<Rigidbody>().isKinematic = !this.transform.GetComponent<Rigidbody>().isKinematic;
+        m_Object.transform.GetComponent<Rigidbody>().isKinematic = !m_Object.transform.GetComponent<Rigidbody>().isKinematic;
+    }
+
+    public  void Undo()
+    {
+        m_Object.transform.GetComponent<Rigidbody>().isKinematic = !m_Object.transform.GetComponent<Rigidbody>().isKinematic;
     }
 }
 

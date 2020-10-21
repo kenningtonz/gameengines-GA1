@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Command : MonoBehaviour
+public interface  Command 
 {
-    public abstract void Execute();
+      void Execute();
 
-    public abstract void Undo( );
+      void Undo( );
 
 
 }

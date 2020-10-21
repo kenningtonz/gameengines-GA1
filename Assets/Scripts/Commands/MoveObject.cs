@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class MoveObject : Command
 {
+    private GameObject m_Object;
+    private Vector3 m_direction;
 
-   public Vector3 m_direction;
-
-
-    public override void Execute()
+    public MoveObject(GameObject Object, Vector3 Direction)
     {
-        this.transform.position += m_direction;
+        m_Object = Object;
+        m_direction = Direction;
     }
 
-    public override void Undo()
+    public  void Execute()
     {
-        this.transform.position -= m_direction;
+        m_Object.transform.position += m_direction;
+    }
+
+    public  void Undo()
+    {
+        m_Object.transform.position -= m_direction;
     }
 
 }

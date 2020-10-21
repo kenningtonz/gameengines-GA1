@@ -14,19 +14,19 @@ public class CommandManager
         }
         return instance;
     }
+    private CommandManager()
+    {
+    }
 
     private Stack<Command> commandstack = new Stack<Command>();
     private Stack<Command> redostack = new Stack<Command>();
 
-    private CommandManager()
-    {
-    }
 
 
     //adding to the list
     public void addcommand(Command command)
     {
-        Debug.Log("added command");
+       // Debug.Log("added command");
         redostack.Clear();
         commandstack.Push(command);
     }
@@ -40,12 +40,12 @@ public class CommandManager
         redostack.Push(commandstack.Peek());
         commandstack.Peek().Undo();
         commandstack.Pop();
-        Debug.Log("undo");
+       Debug.Log("undo");
     }
 
     public void redocommand()
     {
-        Debug.Log("redo");
+      Debug.Log("redo");
         if (redostack.Count == 0)
         {
             return;

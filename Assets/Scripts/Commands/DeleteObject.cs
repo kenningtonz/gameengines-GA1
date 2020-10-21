@@ -4,34 +4,27 @@ using UnityEngine;
 
 public class DeleteObject : Command
 {
-    //private GameObject m_Object;
-    //private Vector3 m_position;
-    //private Quaternion m_rotation;
-    private bool gravity;
+    private GameObject m_Object;
 
-    //public DeleteObject(GameObject Object, Vector3 position, Quaternion rotation)
-    //{
-    //    m_Object = Object;
-    //    m_position = position;
-    //    m_rotation = rotation;
-    //}
 
-    public override void Execute()
+    public DeleteObject(GameObject Object)
     {
-        gravity = GetComponent<Rigidbody>().useGravity;
+        m_Object = Object;
 
-        this.GetComponent<Renderer>().enabled = false;
-        this.GetComponent<Collider>().enabled = false;
-        this.GetComponent<Rigidbody>().useGravity = false;
-        this.GetComponent<ParticleSystem>().Stop();
     }
 
-    public override void Undo()
+    public void Execute()
     {
-        this.GetComponent<Renderer>().enabled = true;
-        this.GetComponent<Collider>().enabled = true;
-        this.GetComponent<ParticleSystem>().Play();
-        this.GetComponent<Rigidbody>().useGravity = gravity;
+      
+            m_Object.SetActive(false);
+   
+    }
+
+    public  void Undo()
+    {
+      
+            m_Object.SetActive(true);
+            m_Object.GetComponent<ParticleSystem>().Play();
 
     }
 
